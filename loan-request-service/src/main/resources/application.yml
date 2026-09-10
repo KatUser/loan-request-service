@@ -1,0 +1,30 @@
+
+spring:
+  application:
+    name: loan-request-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: password
+    username: postgres
+    url: jdbc:postgresql://localhost:5433/loans
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      # Для корректной работы jsonb часто требуется этот параметр:
+      types.enable_auto_registration: true
+  spring:
+    sql:
+      init:
+        mode=always:
+#  rabbitmq:
+#    host: rabbitmq
+#    port: 5672
+#    username: guest
+#    password: guest
+
+server:
+  port: 8081
