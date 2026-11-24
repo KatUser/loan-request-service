@@ -7,6 +7,7 @@ import lombok.Builder;
 @Builder
 public record TermsDto(
         @Positive(message = "Amount must be over zero")
+        @NotNull
         Long amount,
         @NotNull(message = "Repeater cannot be null")
         Boolean isRepeater

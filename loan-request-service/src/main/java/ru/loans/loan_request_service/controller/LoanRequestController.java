@@ -4,13 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.loans.loan_request_service.dto.LoanRequestDto;
 import ru.loans.loan_request_service.mapper.LoanRequestMapper;
 import ru.loans.loan_request_service.service.LoanRequestService;
@@ -27,7 +25,11 @@ public class LoanRequestController {
 
     private final LoanRequestMapper loanRequestMapper;
 
-    @PostMapping("/register")
+    @PostMapping(
+            value = "/register",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<LoanRequestDto> saveLoanRequestDto(@Valid @RequestBody LoanRequestDto loanRequestDto) {
         var loanRequest = loanRequestMapper.convertToLoanRequest(loanRequestDto);
         var booleanSaved = loanRequestService.save(loanRequest);

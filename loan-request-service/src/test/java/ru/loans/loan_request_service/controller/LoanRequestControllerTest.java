@@ -1,11 +1,15 @@
 package ru.loans.loan_request_service.controller;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import ru.loans.loan_request_service.dto.LoanRequestDto;
 import ru.loans.loan_request_service.dto.TermsDto;
 import ru.loans.loan_request_service.mapper.LoanRequestMapper;
@@ -13,6 +17,9 @@ import ru.loans.loan_request_service.model.LoanRequest;
 import ru.loans.loan_request_service.model.Terms;
 import ru.loans.loan_request_service.service.LoanRequestService;
 
+import java.util.Set;
+
+import static jakarta.validation.Validation.buildDefaultValidatorFactory;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
