@@ -1,4 +1,4 @@
-package ru.loans.loan_request_service.configuration;
+package ru.loans.loan_request_service.configuration.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

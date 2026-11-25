@@ -20,11 +20,11 @@ spring:
     sql:
       init:
         mode=always:
-#  rabbitmq:
-#    host: rabbitmq
-#    port: 5672
-#    username: guest
-#    password: guest
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port: 8081
