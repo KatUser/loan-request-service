@@ -96,4 +96,21 @@ public class LoanRequestControllerValidationTest {
                 Arguments.of(new LoanRequestDto(new TermsDto(null, false))));
 
     }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("unsupportedMediaTypes")
+    void whenHeaderIsInValid(MediaType contentType) throws Exception {
+        mockMvc.perform(post("/api/loanrequest/register")
+                        .contentType(contentType)
+                        .content(objectMapper
+                                .writeValueAsString(new LoanRequestDto(new TermsDto(1L, false)))))
+                .andExpect(status().isUnsupportedMediaType());
+    }
+
+    static Stream<Arguments> unsupportedMediaTypes() {
+        return Stream.of(
+                Arguments.of(MediaType.APPLICATION_XML),
+                Arguments.of(MediaType.MULTIPART_FORM_DATA),
+                Arguments.of(MediaType.TEXT_PLAIN));
+    }
 }
