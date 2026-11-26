@@ -15,8 +15,17 @@ public class LoanRequestService {
     private final LoanRequestRepository loanRequestRepository;
 
     public boolean save(LoanRequest loanRequest) {
-        loanRequest.setStatus(LoanRequestStatus.NEW);
-        int res = loanRequestRepository.saveLoanRequest(loanRequest);
-        return res > 0;
+        if (checkLoanRequestTermsDto(loanRequest)) {
+            loanRequest.setStatus(LoanRequestStatus.NEW);
+            int res = loanRequestRepository.saveLoanRequest(loanRequest);
+            return res > 0;
+        }
+        return false;
+    }
+
+
+    private boolean checkLoanRequestTermsDto(LoanRequest loanRequest) {
+        return loanRequest.getTerms().getAmount() > 0
+                && loanRequest.getTerms().getIsRepeater() != null;
     }
 }
