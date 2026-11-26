@@ -22,8 +22,6 @@ public class LoanRequestConsumer {
     public void processLoanRequest(LoanRequestDto loanRequestDto) {
         log.info("Received order: " + loanRequestDto);
 
-        // Здесь выполняется вся бизнес-логика: сохранение в БД, отправка email и т.д.
-        // Этот код выполняется в отдельном потоке, не блокируя HTTP-запросы.
         var loanRequest = loanRequestMapper.convertToLoanRequest(loanRequestDto);
 
         var booleanSaved = loanRequestService.save(loanRequest);
